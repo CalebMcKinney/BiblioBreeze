@@ -1,0 +1,13 @@
+﻿<Application x:Class="BiblioBreeze.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:BiblioBreeze"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <FontFamily x:Key="Josefin Sans">./Fonts/JosefinSans-Regular.ttf#Josefin Sans</FontFamily>
+        <FontFamily x:Key="Josefin Sans Bold">./Fonts/JosefinSans-Bold.ttf#Josefin Sans Bold</FontFamily>
+        <FontFamily x:Key="Josefin Sans Light">./Fonts/JosefinSans-Light.ttf#Josefin Sans Light</FontFamily>
+        <FontFamily x:Key="Josefin Sans Semibold">./Fonts/JosefinSans-Semibold.ttf#Josefin Sans Semibold</FontFamily>
+        <FontFamily x:Key="Oswald">./Fonts/Oswald-Regular.ttf#Oswald</FontFamily>
+    </Application.Resources>
+</Application>

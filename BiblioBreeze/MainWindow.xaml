@@ -1,0 +1,284 @@
+﻿<Window x:Class="BiblioBreeze.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BiblioBreeze"
+        mc:Ignorable="d"
+        Name="Window2"
+        Title="BiblioBreeze - Sign In" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Height="583" Width="1014">
+    <Window.Resources>
+        <Storyboard x:Key="SwapToCreateAnim">
+            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="stackPanel1">
+                <EasingThicknessKeyFrame KeyTime="0" Value="0,-1024,0,0"/>
+                <EasingThicknessKeyFrame KeyTime="0:0:0.3" Value="0"/>
+            </ThicknessAnimationUsingKeyFrames>
+            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="stackPanel">
+                <EasingThicknessKeyFrame KeyTime="0" Value="0"/>
+                <EasingThicknessKeyFrame KeyTime="0:0:0.3" Value="0,846,0,-846"/>
+            </ThicknessAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="SwapToLoginAnim">
+            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="stackPanel">
+                <EasingThicknessKeyFrame KeyTime="0" Value="0,-1024,0,0"/>
+                <EasingThicknessKeyFrame KeyTime="0:0:0.3" Value="0"/>
+            </ThicknessAnimationUsingKeyFrames>
+            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="stackPanel1">
+                <EasingThicknessKeyFrame KeyTime="0" Value="0"/>
+                <EasingThicknessKeyFrame KeyTime="0:0:0.3" Value="0,846,0,-846"/>
+            </ThicknessAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <Storyboard x:Key="TeacherErrorAnimation">
+            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="TeacherErrorNotification">
+                <EasingThicknessKeyFrame KeyTime="0" Value="0,180,0,-120"/>
+                <EasingThicknessKeyFrame KeyTime="0:0:0.5" Value="0,0,0,60"/>
+                <EasingThicknessKeyFrame KeyTime="0:0:2.7" Value="0,0,0,60"/>
+                <EasingThicknessKeyFrame KeyTime="0:0:3.9" Value="0,180,0,-120"/>
+            </ThicknessAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <Storyboard x:Key="CodeErrorAnimation">
+            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="CodeErrorNotification">
+                <EasingThicknessKeyFrame KeyTime="0" Value="0,180,0,-120"/>
+                <EasingThicknessKeyFrame KeyTime="0:0:0.5" Value="0,0,0,60"/>
+                <EasingThicknessKeyFrame KeyTime="0:0:2.7" Value="0,0,0,60"/>
+                <EasingThicknessKeyFrame KeyTime="0:0:3.9" Value="0,180,0,-120"/>
+            </ThicknessAnimationUsingKeyFrames>
+        </Storyboard>
+    </Window.Resources>
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Unloaded">
+            <BeginStoryboard x:Name="SwapToCreateAnimBegin" Storyboard="{StaticResource SwapToCreateAnim}"/>
+            <BeginStoryboard x:Name="SwapToLoginAnimBegin" Storyboard="{StaticResource SwapToLoginAnim}"/>
+            <BeginStoryboard Name="TeacherErrorAnimBegin" Storyboard="{StaticResource TeacherErrorAnimation}"/>
+            <BeginStoryboard Name="CodeErrorAnimBegin" Storyboard="{StaticResource CodeErrorAnimation}"/>
+        </EventTrigger>
+    </Window.Triggers>
+    <Grid x:Name="grid">
+        <!-- Background Color -->
+        <Rectangle Fill="#FFCFE2F3"/>
+
+        <!-- UI Container -->
+        <Grid Name="UIcontainer">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Right Side View -->
+            <Grid Grid.Column="1">
+                <Rectangle Fill="#FFCFE2F3"/>
+
+                <StackPanel Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Stretch">
+                    <TextBlock Text="Enter your given book code." HorizontalAlignment="Center" FontSize="30" FontFamily="{StaticResource Josefin Sans}" Foreground="Black"/>
+                    <Grid Margin="45 18 45 18" >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBox Name="StudentCodeEntry" Grid.Column="0" Height="70" Background="{x:Null}" BorderBrush="Black" BorderThickness="3.25" Margin="0 0 7.5 0" FontFamily="{StaticResource Josefin Sans Semibold}" FontSize="32" VerticalContentAlignment="Center" Padding="15 5 0 0"/>
+                        <Button Click="SignInAsStudent" Grid.Column="1" Background="#FF9FC5E8" BorderBrush="Black" BorderThickness="3.25" Content="REDEEM" FontFamily="{StaticResource Josefin Sans Semibold}" FontSize="22" Margin="7.5 0 0 0" Padding="0 5 0 0" FocusVisualStyle="{x:Null}"/>
+                    </Grid>
+
+                    <Grid Margin="0 10 0 18">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Rectangle Height="5" Fill="Black" Grid.Column="0" Margin="45 0"/>
+                        <Rectangle Height="5" Fill="Black" Grid.Column="1" Margin="45 0"/>
+                        <TextBlock FontFamily="{StaticResource Josefin Sans Semibold}" Text="OR" FontSize="42" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
+                    </Grid>
+
+                    <Button Name="SwapToLeftBtn" Margin="90 5 90 0" Padding="0 20 0 15" FontFamily="{StaticResource Josefin Sans Semibold}" FontSize="28" Content="Login as Teacher" Background="#FF9FC5E8" BorderBrush="Black" BorderThickness="3.25" Click="SwapViewButtonClick"/>
+                </StackPanel>
+            </Grid>
+
+            <!-- Left Side - Sign In -->
+            <StackPanel x:Name="stackPanel" Margin="0 0 0 0" VerticalAlignment="Center" HorizontalAlignment="Stretch" Grid.Column="0">
+
+                <TextBlock Text="Sign in as a Teacher" HorizontalAlignment="Center" FontSize="30" FontFamily="{StaticResource Josefin Sans}" Foreground="Black"/>
+
+                <Grid>
+                    <TextBlock Name="UsernameBoxLabel" Text="username" FontSize="28" FontFamily="{StaticResource Josefin Sans}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <TextBox Name="LoginUsernameBox" Margin="45 10 45 10" Grid.Column="2" Height="55" Background="{x:Null}" BorderBrush="Black" BorderThickness="3.25" FontFamily="{StaticResource Josefin Sans}" FontSize="28" VerticalContentAlignment="Center" Padding="15 5 0 0" TextAlignment="Left" GotFocus="LoginUsernameBox_GotFocus" LostFocus="LoginUsernameBox_LostFocus"/>
+                </Grid>
+
+                <Grid>
+                    <TextBlock Name="PasswordBoxLabel" Text="password" Grid.Row="2" FontSize="28" FontFamily="{StaticResource Josefin Sans}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <PasswordBox Name="LoginPasswordBox" Margin="45 10 45 10" Grid.Row="2" Grid.Column="2" Height="55" Background="{x:Null}" BorderBrush="Black" BorderThickness="3.25" FontFamily="{StaticResource Josefin Sans}" FontSize="28" VerticalContentAlignment="Center" Padding="15 5 0 0" GotFocus="LoginPasswordBox_GotFocus" LostFocus="LoginPasswordBox_LostFocus"/>
+                </Grid>
+
+                <Button Click="SignInAsTeacher" Grid.Column="0" Margin="45 5 45 0" Padding="0 20 0 15" FontFamily="{StaticResource Josefin Sans Semibold}" FontSize="28" Content="SIGN IN" Background="#FF9FC5E8" BorderBrush="Black" BorderThickness="3.25"/>
+
+                <Grid Margin="0 15 0 5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Rectangle Height="5" Fill="Black" Grid.Column="0" Margin="45 0"/>
+                    <Rectangle Height="5" Fill="Black" Grid.Column="1" Margin="45 0"/>
+                    <TextBlock FontFamily="{StaticResource Josefin Sans Semibold}" Text="OR" FontSize="42" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
+                </Grid>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Button Grid.Column="0" Margin="45 5 15 0" Padding="0 12 0 10" FontFamily="{StaticResource Josefin Sans Semibold}" FontSize="22" Background="#FF9FC5E8" BorderBrush="Black" BorderThickness="3.25" Click="SwapToCreate">
+                        <TextBlock TextAlignment="Center">
+                            Create an
+                            <LineBreak/>
+                            Account
+                        </TextBlock>
+                    </Button>
+                    <Button Grid.Column="1" Margin="15 5 45 0" Padding="0 12 0 10" FontFamily="{StaticResource Josefin Sans Semibold}" FontSize="22" Background="#FF9FC5E8" BorderBrush="Black" BorderThickness="3.25" Click="SwapViewButtonClick">
+                        <TextBlock TextAlignment="Center">
+                            Redeem a
+                            <LineBreak/>
+                            Book Code
+                        </TextBlock>
+
+                    </Button>
+
+                </Grid>
+            </StackPanel>
+
+            <!-- Left Side - Create Account -->
+            <StackPanel x:Name="stackPanel1" VerticalAlignment="Center" HorizontalAlignment="Stretch" Grid.Column="0" Margin="0 -1024 0 0">
+                <TextBlock Text="Create Teacher Account" HorizontalAlignment="Center" FontSize="30" FontFamily="{StaticResource Josefin Sans}" Foreground="Black"/>
+
+                <!-- Full Name Entry -->
+                <Grid Margin="45 0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="8*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <ComboBox Name="AccountCreationTitle" Height="55" Background="{x:Null}" BorderBrush="Black" Foreground="Black" FontFamily="{StaticResource Josefin Sans}" FontSize="24" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
+                        <ComboBoxItem Content=""/>
+                        <ComboBoxItem Content="Mr."/>
+                        <ComboBoxItem Content="Mrs."/>
+                        <ComboBoxItem Content="Ms."/>
+                        <ComboBoxItem Content="Dr."/>
+                    </ComboBox>
+
+                    <Grid Grid.Column="1">
+                        <TextBlock Name="AccountCreationLastNameLabel" Text="last name" FontFamily="{StaticResource Josefin Sans}" FontSize="28" TextAlignment="Center" VerticalAlignment="Center" Margin="0 5 0 0"/>
+                        <TextBox Name="AccountCreationLastName" Height="55" Background="{x:Null}" BorderBrush="Black" BorderThickness="3.25" Margin="15 10 0 10" FontSize="28" FontFamily="{StaticResource Josefin Sans}" VerticalContentAlignment="Center" Padding="15 5 0 0" TextAlignment="Left" GotFocus="AccountCreationLastName_GotFocus" LostFocus="AccountCreationLastName_LostFocus"/>
+                    </Grid>
+                </Grid>
+
+                <Grid Grid.Column="1" Margin="45 0 45 10">
+                    <TextBlock Name="AccountCreationUsernameLabel" Text="username" FontFamily="{StaticResource Josefin Sans}" FontSize="28" TextAlignment="Center" VerticalAlignment="Center" Margin="0 5 0 0"/>
+                    <TextBox Name="AccountCreationUsername" Height="55" Background="{x:Null}" BorderBrush="Black" BorderThickness="3.25" FontFamily="{StaticResource Josefin Sans}" FontSize="28" VerticalContentAlignment="Center" Padding="15 5 0 0" TextAlignment="Left" GotFocus="AccountCreationUsername_GotFocus" LostFocus="AccountCreationUsername_LostFocus" />
+                </Grid>
+
+                <Grid Grid.Column="1" Margin="45 0 45 10">
+                    <TextBlock Name="AccountCreationPasswordLabel" Text="password" FontFamily="{StaticResource Josefin Sans}" FontSize="28" TextAlignment="Center" VerticalAlignment="Center" Margin="0 5 0 0"/>
+                    <PasswordBox Name="AccountCreationPassword" Height="55" Background="{x:Null}" BorderBrush="Black" BorderThickness="3.25" FontFamily="{StaticResource Josefin Sans}" FontSize="28" VerticalContentAlignment="Center" Padding="15 5 0 0" GotFocus="AccountCreationPassword_GotFocus" LostFocus="AccountCreationPassword_LostFocus" />
+                </Grid>
+
+                <Button Click="CreateAccount"  Margin="45 5 45 0" Padding="0 20 0 15" FontFamily="{StaticResource Josefin Sans Semibold}" FontSize="28" Content="Create Account" Background="#FF9FC5E8" BorderBrush="Black" BorderThickness="3.25"/>
+
+                <Grid Margin="0 15 0 5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Rectangle Height="5" Fill="Black" Grid.Column="0" Margin="45 0"/>
+                    <Rectangle Height="5" Fill="Black" Grid.Column="1" Margin="45 0"/>
+                    <TextBlock FontFamily="{StaticResource Josefin Sans Semibold}" Text="OR" FontSize="42" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
+                </Grid>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Button Grid.Column="0" Margin="45 5 15 0" Padding="0 12 0 10" FontFamily="{StaticResource Josefin Sans Semibold}" FontSize="22" Background="#FF9FC5E8" BorderBrush="Black" BorderThickness="3.25" Click="SwapToLogin">
+                        <TextBlock TextAlignment="Center" Text="Sign in"/>
+                    </Button>
+                    
+                    <Button Name="SwapToRightBtn" Grid.Column="1" Margin="15 5 45 0" Padding="0 12 0 10" FontFamily="{StaticResource Josefin Sans Semibold}" FontSize="22" Background="#FF9FC5E8" BorderBrush="Black" BorderThickness="3.25" Click="SwapViewButtonClick">
+                        <TextBlock TextAlignment="Center" Text="Enter Book"/>
+                    </Button>
+                </Grid>
+            </StackPanel>
+        </Grid>
+
+        <!-- Credits Region -->
+        <Grid Name="CreditsRegion" Margin="0 0 507 0" Visibility="Visible">
+            <Grid.Resources>
+                <Storyboard x:Key="CreditsTransitionAnim">
+                    <ThicknessAnimation Name="SwapViewAnimation"
+                                Storyboard.TargetName="CreditsRegion" Storyboard.TargetProperty="Margin" Duration="0:0:.2"
+                                From="0" To="0" />
+                </Storyboard>
+            </Grid.Resources>
+
+            <Rectangle Fill="#FF383838"/>
+
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                <TextBlock Name ="OutputLogText" Text="BIBLIOBREEZE" HorizontalAlignment="Center" FontSize="80" FontFamily="{StaticResource Oswald}" Foreground="White"/>
+                <TextBlock Text="by caleb mckinney" Foreground="White" FontFamily="{StaticResource Josefin Sans}" FontSize="36" TextAlignment="Center"/>
+            </StackPanel>
+        </Grid>
+
+        <!-- Notifications -->
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="6*"/>
+                <RowDefinition Height="120"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width=".4*"/>
+                <ColumnDefinition Width="2.5*"/>
+                <ColumnDefinition Width=".8*"/>
+                <ColumnDefinition Width="2.5*"/>
+                <ColumnDefinition Width=".4*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Name="CodeErrorNotification" Grid.Row="1" Grid.Column="3" Margin="0 180 0 -120" Visibility="Visible">
+                <Grid.Resources>
+                    <Storyboard x:Key="CodeErrorAnimStoryboard">
+                        <ThicknessAnimation Name="CodeErrorAnimation"
+                                Storyboard.TargetName="CodeErrorNotification" Storyboard.TargetProperty="Margin" Duration="0:0:2"
+                                From="0 180 0 -120" To="0 0 0 60" AutoReverse="True"/>
+                    </Storyboard>
+                </Grid.Resources>
+
+                <Rectangle Fill="#FFd91e18"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 7 0 0" VerticalAlignment="Center">
+                    <TextBlock Foreground="White" FontSize="18" VerticalAlignment="Center" FontFamily="{StaticResource Josefin Sans Bold}" Text="ERROR: "/>
+                    <TextBlock Name="CodeErrorText" Foreground="White" FontSize="18" VerticalAlignment="Center" FontFamily="{StaticResource Josefin Sans}" Text="User existence not confirmed valid"/>
+                </StackPanel>
+            </Grid>
+            
+            <Grid Name="TeacherErrorNotification" Grid.Row="1" Grid.Column="1" Margin="0 180 0 -120" Visibility="Visible">
+                <Grid.Resources>
+                    <Storyboard x:Key="TeacherErrorAnimStoryboard">
+                        <ThicknessAnimation Name="TeacherErrorAnimation"
+                                Storyboard.TargetName="TeacherErrorNotification" Storyboard.TargetProperty="Margin" Duration="0:0:2"
+                                From="0 180 0 -120" To="0 0 0 60" AutoReverse="True"/>
+                    </Storyboard>
+                </Grid.Resources>
+
+                <Rectangle Fill="#FFd91e18"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 7 0 0" VerticalAlignment="Center">
+                    <TextBlock Foreground="White" FontSize="18" VerticalAlignment="Center" FontFamily="{StaticResource Josefin Sans Bold}" Text="ERROR: "/>
+                    <TextBlock Name="TeacherErrorText" Foreground="White" FontSize="18" VerticalAlignment="Center" FontFamily="{StaticResource Josefin Sans}" Text="User existence not confirmed valid"/>
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

@@ -1,0 +1,73 @@
+﻿<Window x:Class="BiblioBreeze.StudentView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:wf="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"  
+        xmlns:local="clr-namespace:BiblioBreeze"
+        xmlns:fa="http://schemas.fontawesome.io/icons/"
+        mc:Ignorable="d"
+        Title="StudentView" Height="1024" Width="1280" WindowStartupLocation="CenterScreen" WindowState="Maximized">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>        
+        
+        <!-- PDF Viewer -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="5*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <WindowsFormsHost Grid.Column="1" Name="EpubDisplayContainer" Visibility="Collapsed">
+                <wf:WebBrowser x:Name="epubDisplay" DocumentCompleted="LoadPageLocation"/>
+            </WindowsFormsHost>
+
+            <Grid Name="DownloadingBook" Background="#FFeeeeee" Grid.Column="1">
+                <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+
+                    <TextBlock Text="Please Wait" FontFamily="{StaticResource Josefin Sans Bold}" FontSize="96" TextAlignment="Center"/>
+                    <TextBlock Name="DownloadingText" Text="Downloading Book From Servers..." FontFamily="{StaticResource Josefin Sans Bold}" FontSize="45" TextAlignment="Center" Margin="0 20 0 60"/>
+
+                    <fa:ImageAwesome Icon="Spinner" Spin="True" SpinDuration="2" Width="100"/>
+                </StackPanel>
+            </Grid>
+
+            <Button Name="PreviousButton" Click="PreviousButton_Click" Grid.Column="0" Content="&lt;" FontSize="48" FontFamily="{StaticResource Josefin Sans Bold}" IsEnabled="False"/>
+            <Button Name="NextButton" Click="NextButton_Click" Grid.Column="2" Content=">" FontSize="48" FontFamily="{StaticResource Josefin Sans Bold}" IsEnabled="False"/>
+        </Grid>
+
+        <!-- Menu/Navbar -->
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="15"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="15"/>
+            </Grid.RowDefinitions>
+
+            <Rectangle Grid.ColumnSpan="4" Grid.RowSpan="3" Fill="#F2383838"/>
+
+            <StackPanel Grid.Column="1" Grid.Row="1" VerticalAlignment="Center">
+                <TextBlock Grid.Column="1" Name="BookTitleText" Text="BOOK NAME" Foreground="White" FontSize="48" FontFamily="{StaticResource Oswald}" />
+                <TextBlock Grid.Column="1" Name="TeacherNameText" Text="Teacher Name" Foreground="White" FontSize="24" FontFamily="{StaticResource Josefin Sans}" Margin="0 0 0 10"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="2" Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
+                <TextBlock Name="AccountName" Grid.Column="1" Text="Student Name" Foreground="White" FontSize="36" FontFamily="{StaticResource Josefin Sans}" Margin="0 5 0 0" VerticalAlignment="Center"/>
+                <Button Name="OpenAccMenuButton" Width="65" Height="65" Padding="10" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="10 0 0 0" Background="#00000000" BorderBrush="{x:Null}" Cursor="Hand" Click="Logout">
+                    <Path Data="M14.08,15.59L16.67,13H7V11H16.67L14.08,8.41L15.5,7L20.5,12L15.5,17L14.08,15.59M19,3A2,2 0 0,1 21,5V9.67L19,7.67V5H5V19H19V16.33L21,14.33V19A2,2 0 0,1 19,21H5C3.89,21 3,20.1 3,19V5C3,3.89 3.89,3 5,3H19Z" Fill="White" Stretch="Fill" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Button>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>
